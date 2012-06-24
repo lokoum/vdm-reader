@@ -1,9 +1,10 @@
 from lib.vdm import *
 
 def main():
+	x = vdm()
 	while True:
 		try:
-			print("%s\n" % random_story())
+			print("%s\n" % x.new_story())
 			raw_input()
 		except IOError:
 			print("Erreur de connection :(")
