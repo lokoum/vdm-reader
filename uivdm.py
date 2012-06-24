@@ -8,6 +8,7 @@ from lib.vdm import *
 class MyFrame(wx.Frame):
 	def __init__(self, *args, **kwds):
 		self.last_size = 280
+		self.vdm = vdm()
 		kwds["style"] = wx.DEFAULT_FRAME_STYLE
 		wx.Frame.__init__(self, *args, **kwds)
 		self.output = wx.StaticText(self, -1, "")
@@ -35,7 +36,11 @@ class MyFrame(wx.Frame):
 
 	def nouvelle_histoire(self, event):
 		try:
-			self.output.SetLabel(random_story())
+			story = self.vdm.new_story()
+			if story == None:
+				self.output.SetLabel("Pas plus d'histoire aujourd'hui! :(")
+			else:
+				self.output.SetLabel(story)
 			self.last_size += 1
 			self.SetSize((400, self.last_size))
 		except IOError:
