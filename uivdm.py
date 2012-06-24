@@ -37,8 +37,9 @@ class MyFrame(wx.Frame):
 	def nouvelle_histoire(self, event):
 		try:
 			story = self.vdm.new_story()
-			if story == None:
-				self.output.SetLabel("Pas plus d'histoire aujourd'hui! :(")
+			if story == '':
+				self.output.SetLabel(self.vdm.random_story())
+				self.last_size -= 2
 			else:
 				self.output.SetLabel(story)
 			self.last_size += 1
